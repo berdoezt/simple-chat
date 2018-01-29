@@ -1,1 +1,1 @@
-web : simple-chat-app
+web : simple-chat
