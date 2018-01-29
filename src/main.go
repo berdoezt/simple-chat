@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/websocket"
 )
@@ -78,9 +79,13 @@ func main() {
 	// concurrent process with goroutine
 	go handleMessages()
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 	// run the go server
 	log.Println("Server run on http://localhost:8080")
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal("Error on running server : ", err)
 	}
