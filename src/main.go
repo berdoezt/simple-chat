@@ -80,9 +80,6 @@ func main() {
 	go handleMessages()
 
 	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8000"
-	}
 	// run the go server
 	log.Println("Server run on http://localhost:8000")
 	err := http.ListenAndServe(":"+port, nil)
