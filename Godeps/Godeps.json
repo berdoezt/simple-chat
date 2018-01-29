@@ -3,8 +3,12 @@
 	"GoVersion": "go1.9",
 	"GodepVersion": "v74",
 	"Packages":[
-		"github.com/gorilla/websocket",
 		"./..."
 	],
-	"Deps": []
+	"Deps": [
+		{
+			"ImportPath" : "github.com/gorilla/websocket",
+			"Rev" : "3986be78bf859e01f01af631ad76da5b269d270c"
+		}
+	]
 }
