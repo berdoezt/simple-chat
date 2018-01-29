@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>Simple Chat App</title>
+  </head>
+
+  <style>
+    #chat {
+      text-align: left;
+      background: #f1f1f1;
+      width: 500px;
+      min-height: 300px;
+      padding: 20px;
+      height: auto;
+	  max-height: 200px;
+	  overflow: auto;
+	  background-color: #eeeeee;
+	  word-break: normal !important;
+	  word-wrap: normal !important;
+	  white-space: pre !important;
+    }
+  </style>
+
+  <body>
+    <center>
+      <h2 id="head"></h2>
+      <p id="username"></p>
+      <pre id="chat"></pre>
+      <input id="text" type="text">
+      <br>
+      <input type="button" id="button" onclick="send()"></input>
+    </center>
+
+    <script>
+      var url = "ws://" + window.location.host + "/ws";
+      var ws = new WebSocket(url);
+      var registered = false;
+      var username = "";
+
+      var chat_area = document.getElementById("chat");
+      var text = document.getElementById("text");
+      var now = function () {
+        var iso = new Date().toISOString();
+        return iso.split("T")[1].split(".")[0];
+      };
+      
+      if (username == "")
+      {
+      	document.getElementById("button").value = "Join"
+      	document.getElementById("text").placeholder = "enter username";
+      	document.getElementById("chat").style.display = "none"
+      	document.getElementById("head").innerText = "Login"
+      }
+
+      ws.onmessage = function (msg) {
+      	var hasil = JSON.parse(msg.data);
+        var line =  now() + " <" + hasil.username + "> " + hasil.message + "\n";
+        if(registered)
+        	chat_area.innerText += line;
+      };
+
+      function send()
+      {
+      	if (username == "")
+      	{
+      		if (document.getElementById("text").value) 
+      		{
+	      		username = document.getElementById("text").value
+	      		document.getElementById("button").value = "Send"
+			      document.getElementById("text").placeholder = "say something"
+			      document.getElementById("chat").style.display = "block"
+		      	document.getElementById("head").innerText = "Chat"
+            document.getElementById("username").innerText = username
+	      		registered = true
+	      	}
+	     }
+      	else if(registered)
+      	{
+	      	var obj = {"username" : username, "message" : text.value};
+	      	var myJSON = JSON.stringify(obj);
+
+	  		ws.send(myJSON);
+      	}
+
+	  	document.getElementById("text").value = ""
+
+      }
+    </script>
+  </body>
+</html>
