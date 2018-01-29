@@ -1,0 +1,12 @@
+{
+	"ImportPath": "simple-chat/src",
+	"GoVersion": "go1.9",
+	"GodepVersion": "v80",
+	"Deps": [
+		{
+			"ImportPath": "github.com/gorilla/websocket",
+			"Comment": "v1.2.0-27-g91f589d",
+			"Rev": "91f589db023d66e4aba7112d44cc0d2fb091c553"
+		}
+	]
+}

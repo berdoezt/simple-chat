@@ -1,8 +1,0 @@
-{
-	"ImportPath": "simple-chat-app",
-	"GoVersion": "go1.9",
-	"GodepVersion": "v74",
-	"Packages":[
-		"./..."
-	]
-}
