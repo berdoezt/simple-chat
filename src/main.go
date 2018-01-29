@@ -81,10 +81,10 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "8000"
 	}
 	// run the go server
-	log.Println("Server run on http://localhost:8080")
+	log.Println("Server run on http://localhost:8000")
 	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal("Error on running server : ", err)
